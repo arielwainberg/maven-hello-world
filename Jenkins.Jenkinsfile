@@ -33,14 +33,14 @@ pipeline {
                     stage ('Deploy to Staging'){
                         steps {
                             dir ('my-app') {
-                                sh "scp -i /var/lib/jenkins/jenkins.pem **/target/*.jar ${params.username}@${params.dev_env}:/home/jenkins/helloworld_maven"
+                                sh "scp -i /var/lib/jenkins/jenkins.pem ./target/*.jar ${params.username}@${params.dev_env}:/home/jenkins/helloworld_maven"
                             }
                         }
                     }
                     stage ("Deploy to Production"){
                         steps {
                             dir ('my-app') {
-                                sh "scp -i /var/lib/jenkins/jenkins.pem **/target/*.jar ${params.username}@${params.prd_env}:/home/jenkins/helloworld_maven"
+                                sh "scp -i /var/lib/jenkins/jenkins.pem ./target/*.jar ${params.username}@${params.prd_env}:/home/jenkins/helloworld_maven"
                             }
                         }
                     }
