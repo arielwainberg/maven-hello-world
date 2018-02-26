@@ -31,8 +31,8 @@ pipeline {
             stage ('step-4: Deployments'){
                parallel{
                     stage ('Deploy to Staging'){
-                        dir ('my-app') {
-                            steps {
+                        steps {
+                            dir ('my-app') {
                                 sh "scp -i /var/lib/jenkins/jenkins.pem **/target/*.jar ${params.username}@${params.dev_env}:/home/jenkins/helloworld_maven"
                             }
                         }
