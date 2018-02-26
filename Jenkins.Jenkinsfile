@@ -12,9 +12,11 @@ pipeline {
                 }
             }
         }
-        stage ('Step-2: Step-2') {
+        stage('Step-2: Compileing and creating targetting directory includes the Jar File') {
             steps{
-                sh "echo hello"
+                dir ('my-app') {
+                    sh "mvn package"
+                }
             }
         }
     }
