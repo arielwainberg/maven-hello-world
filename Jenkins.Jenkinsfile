@@ -8,23 +8,23 @@ pipeline {
     }
     stages {
             stage('Step-1: Clean Mave ') {
-                dir ('my-app') {
-                    steps {
+                steps {
+                    dir ('my-app') {
                         sh "mvn clean"
                     }
                 }
             }
             stage('Step-2: Compiling And Creating The Job') {
-                dir ('my-app') {
-                    steps{
-                       sh "mvn package"
-                     }
+                steps{
+                    dir ('my-app') {
+                        sh "mvn package"
+                    }
                 }   
             }
             stage('Step-3: Executing the jar file') {
-                dir ('my-app') {
-                    steps{
-                       sh "java -jar target/my-app-1.0-SNAPSHOT.jar"
+                steps{
+                    dir ('my-app') {
+                        sh "java -jar target/my-app-1.0-SNAPSHOT.jar"
                     }
                 }
             }
@@ -38,8 +38,8 @@ pipeline {
                         }
                     }
                     stage ("Deploy to Production"){
-                        dir ('my-app') {
-                            steps {
+                        steps {
+                            dir ('my-app') {
                                 sh "scp -i /var/lib/jenkins/jenkins.pem **/target/*.jar ${params.username}@${params.prd_env}:/home/jenkins/helloworld_maven"
                             }
                         }
