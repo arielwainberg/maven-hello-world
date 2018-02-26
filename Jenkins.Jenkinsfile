@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Step-1: Clean Mave ') {
             steps {
-                dir (my-app) {
+                dir ('my-app') {
                     sh "mvn clean"
                 }
             }
