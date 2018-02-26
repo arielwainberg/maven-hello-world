@@ -1,5 +1,4 @@
 pipeline {
-
     agent any
     parameters {
         string(name: 'username', defaultValue: 'jenkins', description: 'Username to use for scp')
@@ -49,5 +48,3 @@ pipeline {
             }
         }
     }
-    
-}
