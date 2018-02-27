@@ -4,7 +4,7 @@ pipeline {
         string(name: 'username', defaultValue: 'jenkins', description: 'Username to use for scp')
         string(name: 'dev_env', defaultValue: '10.12.100.145', description: 'Developers Server')
         string(name: 'prd_env', defaultValue: '10.12.100.146', description: 'Production Server')
-        string(name: 'EmailAdress', defaultValue: 'ariel@xxxxx.co.il', description: 'Notification Email Address')
+        string(name: 'EmailAdress', defaultValue: 'arielw@pcb.co.il', description: 'Notifications Email Address')
     }
     stages {
             stage('Step-1: Clean Mave ') {
@@ -45,6 +45,14 @@ pipeline {
                         }
                     }
                 }
+            }
+        }
+        post {
+            success {
+                mail (to: "${params.EmailAdress}", subject: "Job '${env.JOB_NAME}' Build(#${env.BUILD_NUMBER}) Succeded" , body: "Job:'${env.JOB_NAME}' on Build:(#${env.BUILD_NUMBER}) Succesesfully ran.")
+            }
+            failure {
+                mail (to: "${params.EmailAdress}", subject: "Job '${env.JOB_NAME}' Build(#${env.BUILD_NUMBER}) Failed" , body: " Job:'${env.JOB_NAME}' on Build:(#${env.BUILD_NUMBER}) Failed To run, go back to Debug!")
             }
         }
     }
